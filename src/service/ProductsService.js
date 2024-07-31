@@ -96,6 +96,8 @@ const productsProductIdsGet = async (productIds, lang = DEFAULT_LANG) => {
                         headers: langHeader
                     });
                     if (promisedProduct.errors) {
+                        hasError = true;
+                        errorMessage = promisedProduct.errors[0].detail;
                         return null; /* return null to make the products filterable in the next step */
                     }
                     const productData = promisedProduct.data;

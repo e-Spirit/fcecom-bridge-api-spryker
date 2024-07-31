@@ -19,9 +19,13 @@ client.interceptors.response.use(
     },
     (error) => {
         const { message, response } = (lastError = error);
-        const data = response?.data || message;
+        const data = response?.data?.errors[0]?.detail ?? response?.data ?? message;
         const details = response?.data?.detail || message;
         const status = response?.status || 500;
+        if (status === 404 || response?.data?.errors[0]?.code === '701') {
+            // Treat invalid categories/products as successes
+            return response;
+        }
         if (response) {
             logger.logError(
                 LOGGING_NAME,

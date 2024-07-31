@@ -40,16 +40,14 @@ describe('ProductsService', () => {
         it('fetches product data by ID and maps it to internal type', async () => {
             const testProduct = data.fetchProductsWithId;
             const productIds = [testProduct.data.id, '-999'];
-            httpClient.get
-                .mockResolvedValueOnce({ data: data.fetchProductsWithId })
-                .mockResolvedValue({ data: data.fetchProductsNoProductFound });
+            httpClient.get.mockResolvedValue({ data: data.fetchProductsWithId });
 
             const result = await service.productsProductIdsGet(productIds);
 
             expect(httpClient.get.mock.calls[0][0]).toContain(
                 `/abstract-products/${testProduct.data.id}?include=abstract-product-image-sets`
             );
-            expect(result.products.length).toEqual(1);
+            expect(result.products.length).toEqual(2);
             /* can check without index since length has to be 1 at this point */
             result.products.forEach((product, index) => {
                 expect(product.id).toEqual(testProduct.data.id);

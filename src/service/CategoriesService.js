@@ -1,3 +1,4 @@
+const { ShopError } = require('fcecom-bridge-commons');
 const httpClient = require('../utils/http-client');
 const logger = require('../utils/logger');
 
