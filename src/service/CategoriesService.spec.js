@@ -114,6 +114,7 @@ describe('CategoriesService', () => {
             expect(result.categorytree[1].children[0].id).toEqual(3);
             expect(result.categorytree[1].children[1].id).toEqual(4);
             expect(result.categorytree[2].id).toEqual(11);
+            expect(result.total).toEqual(13);
         });
         it('returns the categories as tree (with parent ID)', async () => {
             const testCategory = data.categoriesGet.data[0].attributes.categoryNodesStorage[0];
@@ -125,6 +126,7 @@ describe('CategoriesService', () => {
             expect(result.categorytree[0].id).toEqual(6);
             expect(result.categorytree[1].id).toEqual(7);
             expect(result.categorytree[2].id).toEqual(8);
+            expect(result.total).toEqual(3);
         });
     });
 

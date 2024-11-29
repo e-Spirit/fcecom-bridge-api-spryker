@@ -94,7 +94,7 @@ const contentContentIdsGet = async (contentIds, lang = DEFAULT_LANG) => {
         )
     ).filter(Boolean);
 
-    return { content };
+    return { content, total: content.length };
 };
 
 /**

@@ -118,7 +118,7 @@ const productsProductIdsGet = async (productIds, lang = DEFAULT_LANG) => {
         )
     ).filter(Boolean);
 
-    return { products };
+    return { products, total: products.length };
 };
 
 /**

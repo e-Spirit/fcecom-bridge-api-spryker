@@ -108,8 +108,15 @@ const buildCategoryList = (categories) => {
  */
 const filterCategories = (keyword, categories) => {
     const query = keyword.toLowerCase();
-    return categories.filter(category => category.label?.toLowerCase().includes(query));
-}
+    return categories.filter((category) => category.label?.toLowerCase().includes(query));
+};
+
+/**
+ * Recursively counts the total number of categories in a category tree structure.
+ * @param {any[]} tree Category tree.
+ * @returns {number} Total count of all categories including nested children.
+ */
+const countCategories = (tree) => tree.reduce((count, { children = [] }) => count + 1 + countCategories(children), 0);
 
 /**
  * This method fetches all categories and returns them as a flat list structure.
@@ -151,7 +158,10 @@ const categoriesGet = async (parentId, keyword, lang = DEFAULT_LANG, page = 1) =
 const categoryTreeGet = async (parentId, lang = DEFAULT_LANG) => {
     const relevantCategories = await getRelevantCategories(parentId, lang);
     if (relevantCategories) {
-        return { categorytree: buildCategoryTree(relevantCategories) };
+        const tree = buildCategoryTree(relevantCategories);
+        const total = countCategories(tree);
+
+        return { categorytree: tree, total };
     } else {
         return { categorytree: [] };
     }
@@ -191,7 +201,7 @@ const categoriesCategoryIdsGet = async (categoryIds, lang = DEFAULT_LANG) => {
     const filteredCategories = categories.filter(Boolean).map((category) => {
         return { id: category.nodeId, label: category.name };
     });
-    return { categories: filteredCategories };
+    return { categories: filteredCategories, total: filteredCategories.length };
 };
 
 /**
