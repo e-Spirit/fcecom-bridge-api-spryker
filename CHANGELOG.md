@@ -1,3 +1,8 @@
+## [2.5.5](https://github.com/e-Spirit/fcecom-bridge-api-spryker/compare/v2.5.4...v2.5.5) (2025-08-22)
+
+### Changes
+* Updated fcecom-bridge-commons to v2.4.3.
+
 ## [2.5.4](https://github.com/e-Spirit/fcecom-bridge-api-spryker/compare/v2.5.3...v2.5.4) (2024-11-29)
 
 ### Changes
